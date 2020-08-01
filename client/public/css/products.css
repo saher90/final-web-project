@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-wrap:  wrap ;
+    justify-content:space-around,space-evenly  ;
+    padding-left: 20px;
+  }
+.product-small-wrap{ background-color: rgb(182, 230, 173);
+    border-radius: 5px;
+    padding: 10px;}
+
+ 
+
+  
