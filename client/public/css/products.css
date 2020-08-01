@@ -1,12 +1,21 @@
-.container {
+
+.products-container{
     display: flex;
-    flex-wrap:  wrap ;
-    justify-content:space-around,space-evenly  ;
-    padding-left: 20px;
-  }
-.product-small-wrap{ background-color: rgb(182, 230, 173);
+    margin-bottom: 20px;
+    border-style: solid;
+    border-color: green;
+    border-width: 5px;
+    flex-wrap: wrap;
+    justify-content: space-around ;
+
+}
+.product-small-wrap{ 
+    background-color: rgb(0, 31, 51);
     border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10px;}
+    
 
  
 
