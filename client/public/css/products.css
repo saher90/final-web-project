@@ -14,7 +14,11 @@
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding: 10px;}
+    padding: 10px;
+    width: 320px;
+    height: 360px;
+}
+
     .header {
         background-color: #f1f1f1;
         padding: 30px;
@@ -26,10 +30,8 @@
         padding: 10px;
         text-align: center;
       }
-.nav{
-    text-size-adjust: 10px;
-    padding: 30px;
-}
+
+
 #navbar-wrap{
     border-style: solid;
     border-color:  green;
@@ -38,7 +40,15 @@
     border-radius: 5px;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-left: 10px;
 }
+.p{width: 100%;
+}
+.text-wrap{
+    margin-top: 10px;
+
+}
+#quantity{width: 100px;}
     
 
  
