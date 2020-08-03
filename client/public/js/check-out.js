@@ -93,6 +93,7 @@ $(document).ready(function() {
 
 
         $(".flex-row.products-container").html('')
+        var totalPrice = 0
         $.each(obj.items, function(index, item) {
 
             $(".flex-row.products-container").append(`<div class="product-small-wrap" id=${item.name}>
@@ -113,7 +114,9 @@ $(document).ready(function() {
             </div>
         </div>
             `)
+            totalPrice += Number(item.price) * Number(item.quantity)
         })
+        $('#totalPrice').html(`totalPrice$`)
 
 
     })
