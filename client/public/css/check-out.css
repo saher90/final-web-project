@@ -53,3 +53,9 @@
 #quantity {
     width: 100px;
 }
+
+#form-wrap {
+    background-color: lightblue;
+    border-radius: 5px;
+    padding: 10px;
+}

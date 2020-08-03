@@ -28,9 +28,63 @@
         </div>
     </div>
     <div class="container">
-        <div class="flex-row products-container-">
-            <div class="">
+        <div class="row">
+            <div class="col-8 offset-2 mb-3">
+                <h1>check out</h1>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-4 offset-2">
+                <div id="form-wrap">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="yourName" placeholder="First Name *">
+                            <div class="invalid-feedback">Please fill first name</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="yourLastName" placeholder="Last Name *">
+                            <div class="invalid-feedback">Please fill last name</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="yourTel" placeholder="Telephone *">
+                            <div class="invalid-feedback">Please fill Telephone</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="yourEmail" placeholder="Email *">
+                            <div class="invalid-feedback">Please fill a valid email</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="countryName" placeholder="Country Name *">
+                            <div class="invalid-feedback">Please fill last name</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="Cityname" placeholder="City Name *">
+                            <div class="invalid-feedback">Please fill last name</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="address" placeholder="Address *">
+                            <div class="invalid-feedback">Please fill last name</div>
+                        </div>
+
+                        <hr>
+                        <div class="form-group">
+                            <h6><b>Delivery Method</b></h6>
+                            <label for="deliveryType"></label>
+                            <select class="form-control" id="deliveryType">
+                                <option>Normal Delivery</option>
+                                <option>Fast Delivery [10$]</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Order" id="btn-submit">
+                    </form>
+
+                </div>
+            </div>
+
+
+            <div class="col-4">
+                <div id="output"></div>
             </div>
         </div>
         <div class="flex-row products-container">
