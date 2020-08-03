@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    $('.invalid-feedback').hide()
     $.get('./check-out-my-items', function(data, status) {
         var obj = {
             "items": [{
@@ -116,6 +117,65 @@ $(document).ready(function() {
 
 
     })
+    $('#btn-submit').click(function() {
+        $('.invalid-feedback').hide()
+        var isValid = true;
+        var name = $('#Name').val();
+        var lastName = $('#LastName').val();
+        var email = $('Email').val();
+        var country = $('#CountryName').val();
+        var city = $('#CityName').val();
+        var tel = $('#Tel').val();
+        var address = $('#Address').val();
+        var deliveryType = $('#deliveryType').val();
+        var totalPrice = 0;
+
+
+        if (deliveryType != "Normal Delivery") {
+            totalPrice += 10;
+        }
+        if ($('#Name').val() < 1) {
+            $('#Name').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+        if ($('#LastName').val() < 1) {
+            $('#LastName').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+        if (!validEmail($('#Email').val())) {
+            $('#Email').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+
+        if ($('#Tel').val() < 1 || isNaN($('#Tel').val())) {
+            $('#Tel').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+        if ($('#CountryName').val() < 1) {
+            $('#CountryName').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+        if ($('#CityName').val() < 1) {
+            $('#CityName').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+        if ($('#Address').val() < 1) {
+            $('#Address').parent().find('.invalid-feedback').show();
+            isValid = false
+        }
+
+
+        if (isValid) {
+            $('#output').html(`<h5>Order complete :</h5><hr><p>Total: ${totalPrice} $</p><hr>
+            <p>Name: ${name}</p><p>Last Name: ${lastName}</p><p>Tel: ${tel}</p>
+            <p>Email: ${email}</p><p>country: ${country}</p><p>City: ${city}</p>
+            <p>Address: ${address}</p><p>Name: ${name}</p><hr><p>delivery Type: ${deliveryType}</p>`)
+            $('#form-wrap form')[0].reset()
+
+        }
+
+        return false;
+    })
 
     $('.class-quantity').on('change', function() {
         var amount = $(this).val()
@@ -128,3 +188,8 @@ $(document).ready(function() {
     });
 
 });
+
+function validEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
