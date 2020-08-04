@@ -7,7 +7,6 @@ $(document).ready(function() {
         var isValid = true;
         var namename = $('#username').val();
         var password = $('#password').val();
-        var passwordConfirm = $('#passwordConfirm').val();
 
 
         if ($('#username').val() < 1) {
@@ -30,7 +29,12 @@ $(document).ready(function() {
         //check if username exist 
 
         if (isValid) {
+            $.post('/register', { namename, password }, function(res) {
+                localStorage.setItem('token', data.access_token);
+                location.href = '/';
+            }, 'json')
             $('#form-wrap form')[0].reset()
+
         }
 
         return false;
