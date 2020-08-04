@@ -179,6 +179,16 @@ $(document).ready(function() {
 
         return false;
     })
+    $('.form-select').on('change', function() {
+        var val = 0
+        if ($(this).val() != "Normal Delivery") {
+            val = Number($('#totalPrice').html())
+            val += 10
+            $('#totalPrice').html(`${val}`)
+        }
+
+        return false
+    })
 
     $('.class-quantity').on('change', function() {
         var amount = $(this).val()
