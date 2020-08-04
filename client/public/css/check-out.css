@@ -46,10 +46,6 @@
     width: 100%;
 }
 
-.text-wrap {
-    margin-top: 10px;
-}
-
 #quantity {
     width: 100px;
 }
@@ -58,4 +54,5 @@
     background-color: lightblue;
     border-radius: 5px;
     padding: 10px;
+    margin-bottom: 10px;
 }

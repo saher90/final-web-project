@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <!-- Load Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/login.css">
+    <title>log in</title>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Login page</h2>
+    </div>
+    <div class="container">
+        <div class="flex-row login-box">
+
+            <div id="form-wrap">
+                <form method="POST" action="/login">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="form-control" id="btn-submit"> Login </button>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <a href="/register"> Want an account? register</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="footer">
+        <p>Footer</p>
+    </div>
+
+</body>
+
+</html>
