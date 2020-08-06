@@ -30,6 +30,8 @@ $(document).ready(function() {
     $(document).on('click', '.btn-submit', function() {
         var elmId = $(this).closest(".product-small-wrap").attr("id");
         var amount = $(this).closest(".text-wrap").find(".class-quantity").val()
+        $(this).closest(".text-wrap").find(".class-quantity").val(1)
+        $(this).closest(".form-wrap").find('#price').html(`20$`)
         console.log(elmId)
         console.log(amount)
         $.post('/products', { productId: elmId, quantity: amount }, function(res) {
