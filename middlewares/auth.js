@@ -28,7 +28,7 @@ function authorized(req, res, next) {
 
     if (!req.user) {
         console.log("hello")
-        return res.send({ "var": "false" })
+        return res.sendStatus(403)
     }
     return next();
 }

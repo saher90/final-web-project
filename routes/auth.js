@@ -137,17 +137,13 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         const username = req.user.username
         const collection = db.collection('carts');
         const promise = collection.find({ 'username': username }).toArray()
-        promise.then(cart => {
-            let array = []
-            cart.forEach(element => {
-                array.push(element)
-            })
+        promise.then(array => {
             console.log(productId)
             console.log(quantity)
             if (array.length == 0) {
                 const data = {
                     username: username,
-                    products: [{ productId: productId, quantity: quantity }]
+                    products: [{ productId: productId, quantity: quantity }],
                 }
                 console.log("new to cart")
                 console.log(data)
@@ -179,6 +175,106 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         })
 
     })
+    router.get('/checkuser', (req, res) => {
+        if (!req.user) {
+            return res.redirect('/login');
+        }
+        return res.redirect('/check-out');
+    })
+    router.get('/load-data', (req, res) => {
+        if (!req.body) {
+            return res.sendStatus(400);
+        }
+        const username = req.user.username
+        const collection = db.collection('carts');
+        const promise = collection.find({ username: username }).toArray()
+        promise.then(cart => {
+            let retArray = []
+            if (cart.length > 0) {
+                let productsName = []
+                cart.forEach(docs => {
+                    docs.products.forEach(product => {
+                        productsName.push(product.productId)
+                    })
+
+                })
+
+                const collection2 = db.collection('products');
+                const promise2 = collection2.find({ name: { $in: productsName } }).toArray()
+                promise2.then(products => {
+                    cart.forEach(doc => {
+                        doc.products.forEach(productUser => {
+                            products.forEach(product => {
+                                if (productUser.productId === product.name) {
+                                    const data = {
+                                        name: product.name,
+                                        price: product.price,
+                                        imgname: product.imgname,
+                                        description: product.description,
+                                        quantity: productUser.quantity
+                                    }
+
+                                    retArray.push(data)
+
+                                }
+                            })
+
+                        })
+                    })
+                    return res.send(retArray)
+                })
+
+            } else return res.send(retArray)
+
+        })
+
+    })
+    router.post('/update-quantity', (req, res) => {
+        if (!req.body) {
+            return res.sendStatus(400);
+        }
+
+        const username = req.user.username
+        const { productId, quantity } = req.body
+        var oldval
+        const collection = db.collection('carts');
+        const promise = collection.find({ username: username }).toArray()
+        promise.then(cart => {
+            cart.forEach(doc => {
+                doc.products.forEach(productUser => {
+                    if (productUser.productId === productId) {
+                        oldval = productUser.quantity
+                    }
+                })
+            })
+            const val = Number(quantity)
+            collection.updateOne({ username: username, "products.productId": productId }, { $set: { "products.$.quantity": val } })
+            return res.status(200).send({ quantity: quantity, oldquantity: oldval });
+        })
+
+    })
+    router.post('/remove-iteam', (req, res) => {
+        if (!req.body) {
+            return res.sendStatus(400);
+        }
+        const username = req.user.username
+        const { productId } = req.body
+        const collection = db.collection('carts');
+        collection.updateOne({ username: username }, { $pull: { products: { productId: productId } } });
+        return res.status(200).send();
+
+    })
+    router.post('/remove-all', (req, res) => {
+        if (!req.body) {
+            return res.sendStatus(400);
+        }
+        const collection = db.collection('carts');
+        const username = req.user.username
+        collection.deleteOne({ username: username })
+        return res.status(200).send();
+
+    })
+
 
 });
 module.exports = router;

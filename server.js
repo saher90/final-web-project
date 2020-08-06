@@ -40,18 +40,18 @@ app.get('/', function(req, res) {
 app.get('/products', function(req, res) {
     fs.createReadStream('./client/products.html').pipe(res);
 });
-app.get('/check-out', function(req, res) {
+app.get('/check-out', authorized, function(req, res) {
     fs.createReadStream('./client/check-out.html').pipe(res);
 });
 
-app.get('/404', (req, res) => res.status(404).sendFile(path.resolve(__dirname, 'client', '404.html')));
+//app.get('/404', (req, res) => res.status(404).sendFile(path.resolve(__dirname, 'client', '404.html')));
 app.get('/login', anonymouse, function(req, res) {
     fs.createReadStream('./client/login.html').pipe(res);
 });
 app.get('/register', anonymouse, function(req, res) {
     fs.createReadStream('./client/register.html').pipe(res);
 });
-app.use('/', (req, res) => res.redirect('/404'));
+//app.use('/', (req, res) => res.redirect('/404'));
 
 
 //});

@@ -1,100 +1,11 @@
 $(document).ready(function() {
 
-    $.get('./check-out-my-items', function(data, status) {
-        /* var obj = {
-             "items": [{
-                     "name": "ahri",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Ahri-and-D-Va.jpg",
-                     "description": "5 Panel Lol League Legends Ahri Picture Artworks Poster",
-                     "quantity": "2"
-                 },
-                 {
-                     "name": "akali",
-                     "price": 20,
-                     "imgname": "League-of-Legends-akali.jpg",
-                     "description": "5 Panel Lol League Legends Akali Picture Artworks Poster",
-                     "quantity": "1"
-
-                 },
-                 {
-                     "name": "irelia",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Irelia.jpg",
-                     "description": "5 Panel Lol League Legends Irelia Picture Artworks Poster",
-                     "quantity": "4"
-                 },
-                 {
-                     "name": "janna",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Janna.jpg",
-                     "description": "5 Panel Lol League Legends Janna Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "jinx",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Jinx.jpg",
-                     "description": "5 Panel Lol League Legends Jinx Picture Artworks Poster",
-                     "quantity": "5"
-                 },
-                 {
-                     "name": "katarina",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Katarina.jpg",
-                     "description": "5 Panel Lol League Legends Katarina Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "kindred",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Kindred.jpg",
-                     "description": "5 Panel Lol League Legends Kindred Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "lux",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Lux.jpg",
-                     "description": "5 Panel Lol League Legends Lux Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "riven-yasuo",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Riven-Yasuo.jpg",
-                     "description": "5 Panel Lol League Legends Riven And Yasuo Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "xayah-rakan",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Xayah-Rakan.jpg",
-                     "description": "5 Panel Lol League Legends Xayah And Rakan Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "zed-1",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Zed.jpg",
-                     "description": "5 Panel Lol League Legends Zed Picture Artworks Poster",
-                     "quantity": "1"
-                 },
-                 {
-                     "name": "zed-2",
-                     "price": 20,
-                     "imgname": "League-of-Legends-Zed-Game-Canvas.jpg",
-                     "description": "5 Panel Lol League Legends Zed Picture Artworks Poster",
-                     "quantity": "1"
-                 }
-             ]
-         }
-         */
+    $.get('./load-data', function(data, status) {
 
         $(".flex-row.products-container").html('')
         var totalPrice = 0
         $.each(data, function(index, item) {
-
+            var val = Number(item.price) * Number(item.quantity)
             $(".flex-row.products-container").append(`<div class="product-small-wrap" id=${item.name}>
             <div class="img-wrap">
                 <a target="_blank" href="/img/${item.imgname}">
@@ -104,7 +15,7 @@ $(document).ready(function() {
                 <p id="description">${item.description}</p>
                 <div class="form-wrap">
                     <form class="add-form">
-                        <p>price: <b id="price>${Number(item.price) * Number(item.quantity)}$</b></p>
+                        <p>price: <b id="price">${val}</b><b>$</b></p>
                         <label class="quantity-label" for="quantity">Quantity:</label>
                         <input type="number" class="class-quantity" value="${item.quantity}" id="quantity">
                         <input type="button" value="Remove" class="btn-remove">
@@ -114,8 +25,12 @@ $(document).ready(function() {
         </div>
             `)
             totalPrice += Number(item.price) * Number(item.quantity)
+
         })
-        $('#totalPrice').html(`totalPrice$`)
+        if (totalPrice == 0) {
+            alert("cart is empty")
+        }
+        $('#totalPrice').html(`${totalPrice}`)
 
 
     })
@@ -124,13 +39,13 @@ $(document).ready(function() {
         var isValid = true;
         var name = $('#Name').val();
         var lastName = $('#LastName').val();
-        var email = $('Email').val();
+        var email = $('#Email').val();
         var country = $('#CountryName').val();
         var city = $('#CityName').val();
         var tel = $('#Tel').val();
         var address = $('#Address').val();
         var deliveryType = $('#deliveryType').val();
-        var totalPrice = 0;
+        var totalPrice = Number($("#totalPrice").html());
 
 
         if (deliveryType != "Normal Delivery") {
@@ -173,31 +88,72 @@ $(document).ready(function() {
             <p>Email: ${email}</p><p>country: ${country}</p><p>City: ${city}</p>
             <p>Address: ${address}</p><p>Name: ${name}</p><hr><p>delivery Type: ${deliveryType}</p>`)
             $('#form-wrap form')[0].reset()
+            $("#totalPrice").html("0")
+            $('#myproducts').empty()
 
         }
 
         return false;
     })
     $(document).on('change', '.form-select', function() {
-        var val = 0
-        if ($(this).val() != "Normal Delivery") {
-            val = Number($('#totalPrice').html())
+        var val = Number($('#totalPrice').html())
+        if ($(this).val() != "Normal Delivery")
             val += 10
-            $('#totalPrice').html(`${val}`)
-        }
+        else
+            val -= 10
 
+        $('#totalPrice').html(`${val}`)
         return false
     })
 
     $(document).on('change', '.class-quantity', function() {
         var amount = $(this).val()
+        var oldvalue
+        var curvalue
+        var price, temp
+        var elmId
         if (amount > 0) {
+            elmId = $(this).closest(".product-small-wrap").attr("id");
+            $.post('/update-quantity', { productId: elmId, quantity: amount }, function(res, status) {
+                console.log("hello1")
+                console.log(Number(res.quantity))
+                console.log(status)
+
+                if (status) {
+                    alert("hello2")
+                    oldvalue = Number(res.quantity) - Number(res.oldquantity)
+                    oldvalue *= 20
+                    temp = Number($("#totalPrice").html())
+                    temp += oldvalue
+                    $("#totalPrice").html(`${temp}`)
+                }
+            }, 'json')
             amount *= 20
-            $(this).closest(".form-wrap").find('#price').html(`${amount}$`)
-        } else
-            $(this).val(1)
+            $(this).closest(".form-wrap").find('#price').html(`${amount}`)
+        } else {
+            oldvalue = Number($(this).closest(".form-wrap").find('#price').html()) / 20
+            $(this).val(oldvalue)
+        }
         return false;
     });
+    $(document).on('click', '.btn-remove', function() {
+        var elmId = $(this).closest(".product-small-wrap").attr("id");
+        var amount = Number($(this).closest(".form-wrap").find('#price').html())
+        var totalAmount = Number($("#totalPrice").html())
+        totalAmount -= amount
+        $.post('/remove-iteam', { productId: elmId }, 'json').done(function(res, status) {
+            if (status) {
+                alert("item removed!")
+                $(`#${elmId}`).remove()
+                $("#totalPrice").html(`${totalAmount}`)
+            }
+        }).fail(function(res) {
+            alert("fail to remove!")
+            if (res.status === 403) {
+                alert("fail to remove!")
+            }
+        })
+    })
 
 });
 
