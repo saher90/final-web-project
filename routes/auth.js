@@ -34,18 +34,18 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             let array = []
             let check = true
             if (docs.length == 0) {
-                console.log("111")
+
                 check = false;
             }
             docs.forEach(element => {
                 array.push(element)
                 if (element.password != password) {
-                    console.log("222")
+
                     check = false;
                 }
             });
             if (!check) {
-                console.log("222222")
+
                 return res.sendStatus(400);
             }
             const user = array.pop()
@@ -125,9 +125,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             var array = []
             docs.forEach(element => {
                 array.push(element)
-            });
+            })
             res.send(array)
         });
+
+
     })
     router.post('/products', authorized, (req, res) => {
         if (!req.body) {
@@ -264,15 +266,36 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         return res.status(200).send();
 
     })
-    router.post('/remove-all', (req, res) => {
+    router.post('/order', (req, res) => {
         if (!req.body) {
             return res.sendStatus(400);
         }
+        const { firstname, lastname, tel, email, address, country, city, totalPrice } = req.body
         const collection = db.collection('carts');
+        const collection2 = db.collection('orders');
         const username = req.user.username
-        collection.deleteOne({ username: username })
-        return res.status(200).send();
+        var orders = []
+        const array = collection.findOne({ username: username })
 
+        array.then(doc => {
+            doc.products.forEach(product => {
+                orders.push(product)
+            })
+            const data = {
+                firstname,
+                lastname,
+                tel,
+                email,
+                address,
+                country,
+                city,
+                totalPrice,
+                orders
+            }
+            collection2.insertOne(data)
+            collection.deleteOne({ username: username })
+            return res.status(200).send();
+        })
     })
 
 

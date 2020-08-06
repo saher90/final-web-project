@@ -37,8 +37,8 @@ $(document).ready(function() {
     $('#btn-submit').click(function() {
         $('.invalid-feedback').hide()
         var isValid = true;
-        var name = $('#Name').val();
-        var lastName = $('#LastName').val();
+        var firstname = $('#Name').val();
+        var lastname = $('#LastName').val();
         var email = $('#Email').val();
         var country = $('#CountryName').val();
         var city = $('#CityName').val();
@@ -84,10 +84,31 @@ $(document).ready(function() {
 
         if (isValid) {
             $('#output').html(`<h5>Order complete :</h5><hr><p>Total: ${totalPrice} $</p><hr>
-            <p>Name: ${name}</p><p>Last Name: ${lastName}</p><p>Tel: ${tel}</p>
+            <p>firstName: ${firstname}</p><p>LastName: ${lastname}</p><p>Tel: ${tel}</p>
             <p>Email: ${email}</p><p>country: ${country}</p><p>City: ${city}</p>
-            <p>Address: ${address}</p><p>Name: ${name}</p><hr><p>delivery Type: ${deliveryType}</p>`)
+            <p>Address: ${address}</p><hr><p>delivery Type: ${deliveryType}</p>`)
             $('#form-wrap form')[0].reset()
+            const data = {
+                firstname,
+                lastname,
+                tel,
+                email,
+                address,
+                country,
+                city,
+                totalPrice
+            }
+            $.post('/order', data, 'json').done(function(res, status) {
+                if (status) {
+                    alert("order done!")
+                    $("#totalPrice").html("0")
+                    $('#myproducts').empty()
+                }
+            }).fail(function(res) {
+                if (res.status === 403) {
+                    alert("fail to order!")
+                }
+            })
             $("#totalPrice").html("0")
             $('#myproducts').empty()
 
@@ -109,8 +130,7 @@ $(document).ready(function() {
     $(document).on('change', '.class-quantity', function() {
         var amount = $(this).val()
         var oldvalue
-        var curvalue
-        var price, temp
+        var temp
         var elmId
         if (amount > 0) {
             elmId = $(this).closest(".product-small-wrap").attr("id");
