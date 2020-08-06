@@ -28,8 +28,19 @@ $(document).ready(function() {
     })
 
     $(document).on('click', '.btn-submit', function() {
-        var elmId = $(this).closest(".text-wrap").attr("id");
+        var elmId = $(this).closest(".product-small-wrap").attr("id");
+        var amount = $(this).closest(".text-wrap").find(".class-quantity").val()
         console.log(elmId)
+        console.log(amount)
+        $.post('/products', { productId: elmId, quantity: amount }, function(res) {
+            if (res.var == "false") {
+                alert("login first")
+            }
+            location.href = '/login';
+            if (res.statusCode == 200)
+                alert("item added to cart!")
+        }, 'json')
+
         return false;
     })
     $(document).on('click', '.class-quantity', function() {

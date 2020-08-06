@@ -5,7 +5,7 @@ $(document).ready(function() {
 
         $('.invalid-feedback').hide()
         var isValid = true;
-        var namename = $('#username').val();
+        var username = $('#username').val();
         var password = $('#password').val();
 
 
@@ -29,7 +29,8 @@ $(document).ready(function() {
         //check if username exist 
 
         if (isValid) {
-            $.post('/register', { namename, password }, function(res) {
+            $.post('/register', { username, password }, function(res) {
+                console.log(`name:${username} pass:${password}`)
                 localStorage.setItem('token', data.access_token);
                 location.href = '/';
             }, 'json')

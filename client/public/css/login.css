@@ -11,6 +11,17 @@
     text-align: center;
 }
 
+#navbar-wrap {
+    border-style: solid;
+    border-color: green;
+    border-width: 1px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
 form {
     max-width: 300px;
     margin: 5px auto;
