@@ -1,0 +1,112 @@
+.header {
+    background-color: #f1f1f1;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+}
+
+.footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    text-align: center;
+}
+
+.orders-container {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: lightsteelblue;
+    border-width: 5px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.order-container {
+    display: flex;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    background-color: magenta;
+    border-style: solid;
+    border-color: green;
+    border-width: 2px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.mini-detals-box {
+    display: flex;
+    border-style: solid;
+    border-color: red;
+    border-width: 2px;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.large-detals-box {
+    display: flex;
+    border-style: solid;
+    border-color: steelblue;
+    border-width: 2px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.user-detal-box {
+    display: flex;
+    border-style: solid;
+    border-color: lightseagreen;
+    border-width: 2px;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.order-detal-box {
+    display: flex;
+    border-style: solid;
+    border-color: mediumblue;
+    border-width: 2px;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#navbar-wrap {
+    border-style: solid;
+    border-color: green;
+    border-width: 1px;
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+}
+
+#btn-show {
+    border-radius: 10px;
+    margin-bottom: 2px;
+    background-color: mediumseagreen
+}
+
+#btn-close {
+    border-radius: 10px;
+    margin-bottom: 2px;
+    background-color: firebrick
+}

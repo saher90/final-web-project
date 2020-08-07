@@ -76,7 +76,6 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         // make sure user does not exist
         collection.find({ 'username': username }).toArray(function(err, docs) {
             assert.equal(err, null);
-            console.log("Found the following records");
             let array = []
             docs.forEach(element => {
                 array.push(element.username)
@@ -270,7 +269,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         if (!req.body) {
             return res.sendStatus(400);
         }
-        const { firstname, lastname, tel, email, address, country, city, totalPrice } = req.body
+        const { firstname, lastname, tel, email, address, country, city, totalPrice, deliveryMethod } = req.body
         const collection = db.collection('carts');
         const collection2 = db.collection('orders');
         const username = req.user.username
@@ -281,7 +280,9 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             doc.products.forEach(product => {
                 orders.push(product)
             })
+
             const data = {
+                username,
                 firstname,
                 lastname,
                 tel,
@@ -290,12 +291,26 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 country,
                 city,
                 totalPrice,
+                deliveryMethod,
+                date: new Date().toISOString(),
                 orders
             }
             collection2.insertOne(data)
             collection.deleteOne({ username: username })
             return res.status(200).send();
         })
+    })
+    router.get('/load-orders', (req, res) => {
+        const collection = db.collection('orders');
+        collection.find().toArray(function(err, docs) {
+            assert.equal(err, null);
+            var array = []
+            docs.forEach(element => {
+                array.push(element)
+            })
+            res.status(200).send(array)
+        });
+
     })
 
 

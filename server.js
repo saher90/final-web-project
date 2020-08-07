@@ -51,6 +51,9 @@ app.get('/login', anonymouse, function(req, res) {
 app.get('/register', anonymouse, function(req, res) {
     fs.createReadStream('./client/register.html').pipe(res);
 });
+app.get('/orders', function(req, res) {
+    fs.createReadStream('./client/orders.html').pipe(res);
+});
 //app.use('/', (req, res) => res.redirect('/404'));
 
 

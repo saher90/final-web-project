@@ -44,11 +44,11 @@ $(document).ready(function() {
         var city = $('#CityName').val();
         var tel = $('#Tel').val();
         var address = $('#Address').val();
-        var deliveryType = $('#deliveryType').val();
+        var deliveryMethod = $('#deliveryType').val();
         var totalPrice = Number($("#totalPrice").html());
 
 
-        if (deliveryType != "Normal Delivery") {
+        if (deliveryMethod != "Normal Delivery") {
             totalPrice += 10;
         }
         if ($('#Name').val() < 1) {
@@ -86,7 +86,7 @@ $(document).ready(function() {
             $('#output').html(`<h5>Order complete :</h5><hr><p>Total: ${totalPrice} $</p><hr>
             <p>firstName: ${firstname}</p><p>LastName: ${lastname}</p><p>Tel: ${tel}</p>
             <p>Email: ${email}</p><p>country: ${country}</p><p>City: ${city}</p>
-            <p>Address: ${address}</p><hr><p>delivery Type: ${deliveryType}</p>`)
+            <p>Address: ${address}</p><hr><p>delivery Type: ${deliveryMethod}</p>`)
             $('#form-wrap form')[0].reset()
             const data = {
                 firstname,
@@ -96,7 +96,8 @@ $(document).ready(function() {
                 address,
                 country,
                 city,
-                totalPrice
+                totalPrice,
+                deliveryMethod
             }
             $.post('/order', data, 'json').done(function(res, status) {
                 if (status) {

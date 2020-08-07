@@ -229,3 +229,105 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
+             <div class="container orders-container">
+        <div class="flex-row order-container">
+            <div class="flex-row mini-detals-box">
+                <p>To: <b id="firstname">saher</b> <b id="lastname">naoum</b></p>
+                <p>Ordered in Date: <b id="date">11/6/90</b></p>
+                <p>Send to address: <b id="county">israel</b> ,<b id="city">shefamer</b> ,<b id="address">dher khnes</b></p>
+                <p>total: <b id="total">200</b><b>$</b></p>
+                <p>Delivery Method: <b id="deliveryMethod">fast</b></p>
+                <button type="button" class="btn-show">Show order</button>
+            </div>
+            <div class="flex-row  large-detals-box">
+                <div class="flex-row user-detal-box">
+                    <p>tel: <b id="tel">2154542315</b></p>
+                    <p>email: <b id="email">jdkashd@kjdsdsd.vdfd</b></p>
+                </div>
+
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <button type="button" class="btn-close">Close</button>
+            </div>
+        </div>
+
+        <div class="flex-row order-container">
+            <div class="flex-row mini-detals-box">
+                <p>To: <b id="firstname">saher</b> <b id="lastname">naoum</b></p>
+                <p>Ordered in Date: <b id="date">11/6/90</b></p>
+                <p>Send to address: <b id="county">israel</b> ,<b id="city">shefamer</b> ,<b id="address">dher khnes</b></p>
+                <p>total: <b id="total">200</b><b>$</b></p>
+                <p>Delivery Method: <b id="deliveryMethod">fast</b></p>
+                <button type="button" class="btn-show">Show order</button>
+            </div>
+            <div class="flex-row  large-detals-box">
+                <div class="flex-row user-detal-box">
+                    <p>tel: <b id="tel">2154542315</b></p>
+                    <p>email: <b id="email">jdkashd@kjdsdsd.vdfd</b></p>
+                </div>
+
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+
+                <button type="button" class="btn-close">Close</button>
+            </div>
+
+        </div>
+        <div class="flex-row order-container">
+            <div class="flex-row mini-detals-box">
+                <p>To: <b id="firstname">saher</b> <b id="lastname">naoum</b></p>
+                <p>Ordered in Date: <b id="date">11/6/90</b></p>
+                <p>Send to address: <b id="county">israel</b> ,<b id="city">shefamer</b> ,<b id="address">dher khnes</b></p>
+                <p>total: <b id="total">200</b><b>$</b></p>
+                <p>Delivery Method: <b id="deliveryMethod">fast</b></p>
+                <button type="button" class="btn-show">Show order</button>
+            </div>
+            <div class="flex-row  large-detals-box">
+                <div class="flex-row user-detal-box">
+                    <p>tel: <b id="tel">2154542315</b></p>
+                    <p>email: <b id="email">jdkashd@kjdsdsd.vdfd</b></p>
+                </div>
+
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <div class="flex-row order-detal-box">
+                    <p>Product Id: <b id="productId">ahri</b></p>
+                    <p>Quantity: <b id="quantity">3</b></p>
+                </div>
+                <button type="button" class="btn-close">Close</button>
+            </div>
+
+        </div>
+    </div>
