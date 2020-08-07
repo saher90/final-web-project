@@ -9,6 +9,7 @@ const dbName = 'heroku_9200wlz6'; // Database Name
 const dbName2 = 'test'
 const JWT_SECRET = 'black life matter XD';
 const COOKIE_NAME = 'jwt-access-token';
+const ADMINPASSWORD = "telhai"
 
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
@@ -30,7 +31,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
         collection.find({ 'username': username }).toArray(function(err, docs) {
             assert.equal(err, null);
-            console.log("Found the following records");
+
             let array = []
             let check = true
             if (docs.length == 0) {
@@ -64,6 +65,52 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
 
     });
+    router.post('/admin-login', (req, res) => {
+        const collection = db.collection('admin-users');
+        // make sure request body exist
+        if (!req.body) {
+            return res.sendStatus(400);
+        }
+
+        // make sure user exists and passwords match
+        // note: this is a bad practice to store raw passwords
+        const { username, password } = req.body;
+
+        collection.find({ 'username': username }).toArray(function(err, docs) {
+            assert.equal(err, null);
+
+            let array = []
+            let check = true
+            if (docs.length == 0) {
+
+                check = false;
+            }
+            docs.forEach(element => {
+                array.push(element)
+                if (element.password != password) {
+
+                    check = false;
+                }
+            });
+            if (!check) {
+
+                return res.sendStatus(400);
+            }
+            const user = array.pop()
+
+            // create a jwt token for the user
+            const payload = { username: user.username, joined: user.joined };
+            const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
+            // set cookie for the client with the jwt
+            res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
+
+            res.redirect('/');
+
+        });
+
+
+
+    });
 
     router.post('/register', (req, res) => {
         const collection = db.collection('users');
@@ -81,11 +128,10 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
                 array.push(element.username)
             });
             if (array.length > 0) {
-                console.log("exist")
+
                 return res.sendStatus(400);
-            } else
+            }
             // create a new user record in the json db
-                console.log("not exist")
 
             const user = {
                 username,
@@ -110,7 +156,50 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         })
 
     });
+    router.post('/admin-register', (req, res) => {
+        const collection = db.collection('admin-users');
+        // make sure request body exist
+        if (!req.body) {
+            return res.sendStatus(400);
+        }
 
+        const { username, password, adminPassword } = req.body;
+
+        if (ADMINPASSWORD === adminPassword) {
+            // make sure user does not exist
+            collection.find({ 'username': username }).toArray(function(err, docs) {
+                assert.equal(err, null);
+                let array = []
+                docs.forEach(element => {
+                    array.push(element.username)
+                });
+                if (array.length > 0) {
+                    return res.sendStatus(400);
+                }
+                // create a new user record in the json db
+
+                const user = {
+                    username,
+                    password,
+                    joined: new Date().toISOString(),
+                };
+
+                collection.insertOne(user);
+
+
+                // create a jwt token for the user
+                const payload = { username: user.username, joined: user.joined };
+                const accessToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
+
+                // set cookie for the client with the jwt
+                res.cookie(COOKIE_NAME, accessToken, { httpOnly: true });
+
+                res.redirect('/');
+
+            })
+        } else return res.sendStatus(400);
+
+    });
     router.get('/logout', (req, res) => {
         // remove the cookie to perform a logout
         res.clearCookie(COOKIE_NAME);
@@ -120,7 +209,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         const collection = db.collection('products')
         collection.find().toArray(function(err, docs) {
             assert.equal(err, null);
-            console.log("Found the following records");
+
             var array = []
             docs.forEach(element => {
                 array.push(element)
@@ -139,15 +228,13 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         const collection = db.collection('carts');
         const promise = collection.find({ 'username': username }).toArray()
         promise.then(array => {
-            console.log(productId)
-            console.log(quantity)
+
             if (array.length == 0) {
                 const data = {
                     username: username,
                     products: [{ productId: productId, quantity: quantity }],
                 }
-                console.log("new to cart")
-                console.log(data)
+
                 collection.insertOne(data)
                 return res.sendStatus(200)
             }
@@ -229,6 +316,23 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
         })
 
+    })
+    router.get('/is-admin', (req, res) => {
+
+        if (!req.body) {
+            return res.send({ admin: false });
+        }
+
+        if (!req.user) {
+            return res.send({ admin: false })
+        }
+        const username = req.user.username
+        const collection = db.collection('admin-users');
+        const array = collection.findOne({ username: username })
+        array.then(doc => {
+            if (doc) return res.send({ admin: true })
+            else return res.send({ admin: false })
+        })
     })
     router.post('/update-quantity', (req, res) => {
         if (!req.body) {

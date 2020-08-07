@@ -33,19 +33,28 @@
             <div id="form-wrap">
                 <form>
                     <div class="form-group">
-                        <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                        <input type="text" name="username" class="form-control" id="username" placeholder="Username *">
                         <div class="invalid-feedback Aa">UserName Exist ,Try Different UserName</div>
                         <div class="invalid-feedback Bb">Please fill UserName</div>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                        <input type="password" name="password" class="form-control" id="password" placeholder="Password *">
                         <div class="invalid-feedback Bb">Please fill Password</div>
                     </div>
                     <div class="form-group">
-                        <input type="password" name="passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Confirm Password">
+                        <input type="password" name="passwordConfirm" class="form-control" id="passwordConfirm" placeholder="Confirm Password *">
                         <div class="invalid-feedback Bb">Please Confirm Password</div>
                         <div class="invalid-feedback Aa">Password Doesn't match</div>
                     </div>
+                    <div class="form-group" id="regAdmin">
+                        <input type="password" name="admin-password" class="form-control" id="admin-password" placeholder="AdminPassword *">
+                        <div class="invalid-feedback">Please fill Admin Password</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" id="admin" name="admin" value="admin">
+                        <label for="admin">admin register</label>
+                    </div>
+
                     <div class="form-group">
                         <button type="button" class="form-control" id="btn-submit"> Register </button>
                     </div>
