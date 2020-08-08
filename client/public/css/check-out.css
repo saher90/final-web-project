@@ -26,6 +26,7 @@
 }
 
 #navbar-wrap {
+    display: flex;
     border-style: solid;
     border-color: green;
     border-width: 1px;
@@ -34,6 +35,22 @@
     margin-top: 10px;
     margin-bottom: 10px;
     padding-left: 10px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: 30px;
+    justify-content: flex-start
+}
+
+#loggedin {
+    margin-left: 10px;
+}
+
+#username {
+    color: black;
+}
+
+#loginColor {
+    color: #007bff;
 }
 
 .footer {

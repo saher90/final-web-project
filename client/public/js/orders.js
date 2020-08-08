@@ -26,11 +26,40 @@ $(document).ready(function() {
 
             })
 
-            console.log(`${data.username}`)
             $(`#${data.username}`).append(` <button type="button" id="btn-close">Close</button>`)
-            console.log($(`#${data.username}`).html())
         })
         $(".flex-row.large-detals-box").hide()
+    })
+    $.get('/is-admin', function(data, status) {
+        if (status) {
+            var flag = data.admin
+            if (flag == "admin") {
+                $(".flex-row.navbar-container").html('')
+                $(".flex-row.navbar-container").append(`<div id="navbar-wrap">
+                <nav id="navBar">
+                <a href="/">Home Page</a> |
+                <a href="/products">Products Page</a>
+                </nav>
+                <div id="loggedin">
+                <p id="loginColor">logged in as: <b id="username">${data.username}</b></p>
+                </div>
+            </div>`)
+            }
+            if (flag == "client") {
+                $(".flex-row.navbar-container").html('')
+                $(".flex-row.navbar-container").append(`<div id="navbar-wrap">
+                <nav id="navBar">
+                <a href="/">Home Page</a> |
+                <a href="/products">Products Page</a>
+                </nav>
+                <div id="loggedin">
+                <p id="loginColor">logged in as: <b id="username">${data.username}</b></p>
+                </div>
+            </div>`)
+            }
+
+
+        }
     })
 
     $(document).on('click', '#btn-show', function() {

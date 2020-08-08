@@ -317,22 +317,22 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         })
 
     })
-    router.get('/is-admin', (req, res) => {
+    router.get('/is-admin', checkuser, (req, res) => {
+        return res.send(req.admin);
+        /* if (!req.body) {
+             return res.send({ admin: "empty" });
+         }
 
-        if (!req.body) {
-            return res.send({ admin: false });
-        }
-
-        if (!req.user) {
-            return res.send({ admin: false })
-        }
-        const username = req.user.username
-        const collection = db.collection('admin-users');
-        const array = collection.findOne({ username: username })
-        array.then(doc => {
-            if (doc) return res.send({ admin: true })
-            else return res.send({ admin: false })
-        })
+         if (!req.user) {
+             return res.send({ admin: "empty" })
+         }
+         const username = req.user.username
+         const collection = db.collection('admin-users');
+         const array = collection.findOne({ username: username })
+         array.then(doc => {
+             if (doc) return res.send({ admin: "admin", username: username })
+             else return res.send({ admin: "client", username: username })
+         })*/
     })
     router.post('/update-quantity', (req, res) => {
         if (!req.body) {
@@ -405,6 +405,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         })
     })
     router.get('/load-orders', (req, res) => {
+
         const collection = db.collection('orders');
         collection.find().toArray(function(err, docs) {
             assert.equal(err, null);
@@ -414,9 +415,34 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             })
             res.status(200).send(array)
         });
-
     })
 
 
+    function checkuser(req, res, next) {
+
+        if (!req.body) {
+            req.admin = "empty"
+            return next();
+        }
+
+        if (!req.user) {
+            req.admin = "empty"
+            return next();
+        }
+        const username = req.user.username
+        const collection = db.collection('admin-users');
+        const array = collection.findOne({ username: username })
+        array.then(doc => {
+            if (doc)
+                req.admin = { admin: "admin", username: username }
+            else
+                req.admin = { admin: "client", username: username }
+
+            return next();
+        })
+
+    }
 });
+
+
 module.exports = router;

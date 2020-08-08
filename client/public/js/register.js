@@ -54,9 +54,7 @@ $(document).ready(function() {
         if (isValid) {
 
             $.post(url, data, 'json').done(res => {
-                console.log(`name:${username} pass:${password}`)
                 alert(`welcome ${username}`)
-                localStorage.setItem('token', data.access_token);
                 location.href = '/';
             }).fail(res => {
                 alert("bad user password try again !")

@@ -4,6 +4,7 @@ $(document).ready(function() {
 
         $(".flex-row.products-container").html('')
         var totalPrice = 0
+
         $.each(data, function(index, item) {
             var val = Number(item.price) * Number(item.quantity)
             $(".flex-row.products-container").append(`<div class="product-small-wrap" id=${item.name}>
@@ -33,6 +34,24 @@ $(document).ready(function() {
         $('#totalPrice').html(`${totalPrice}`)
 
 
+    })
+    $.get('/is-admin', function(data, status) {
+        if (status) {
+
+            $(".flex-row.navbar-container").html('')
+            $(".flex-row.navbar-container").append(`<div id="navbar-wrap">
+                <nav id="navBar">
+                <a href="/">Home page</a> |
+                <a href="/products">products</a>
+                </nav>
+                <div id="loggedin">
+                <p id="loginColor">logged in as: <b id="username">${data.username}</b></p>
+                </div>
+            </div>`)
+
+
+
+        }
     })
     $('#btn-submit').click(function() {
         $('.invalid-feedback').hide()
@@ -136,12 +155,7 @@ $(document).ready(function() {
         if (amount > 0) {
             elmId = $(this).closest(".product-small-wrap").attr("id");
             $.post('/update-quantity', { productId: elmId, quantity: amount }, function(res, status) {
-                console.log("hello1")
-                console.log(Number(res.quantity))
-                console.log(status)
-
                 if (status) {
-                    alert("hello2")
                     oldvalue = Number(res.quantity) - Number(res.oldquantity)
                     oldvalue *= 20
                     temp = Number($("#totalPrice").html())

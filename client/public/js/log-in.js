@@ -20,8 +20,9 @@ $(document).ready(function() {
         }
 
         if (isValid) {
+            console.log(`user: ${username} pass :${password}`)
             $.post(url, { username, password }, 'json').done(res => {
-                localStorage.setItem('token', data.access_token);
+                alert(`welcome ${username}`)
                 location.href = '/';
             }).fail(res => {
                 alert("bad user password try again !")
