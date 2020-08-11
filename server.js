@@ -12,7 +12,7 @@ const collections = require('./mongodb/connection.js')
 const app = express()
 const PORT = process.env.PORT || 3000
 const url = process.env.MONGODB_URI || 'mongodb://localhost:27017'; // mongodb Connection URL
-const dbName = 'heroku_9200wlz6'; // Database Name
+const dbName = 'heroku_59w7kczx'; // Database Name
 const dbName2 = 'test'
 
 
