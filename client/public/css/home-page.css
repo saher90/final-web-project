@@ -41,6 +41,145 @@
     justify-content: flex-start
 }
 
+.middle-page {
+    display: flex;
+    border-style: solid;
+    border-color: green;
+    border-width: 1px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #f1f1f1;
+    justify-content: space-between;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.api-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    text-align: center;
+    width: 55%;
+}
+
+.weather-api-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+    justify-content: space-around;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.product-info {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    padding: 5px;
+    width: 45%;
+    height: 400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.weather-output {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.nba-api-wrap {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+    justify-content: space-around;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-warp {
+    width: 70%;
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.final {
+    border-style: solid;
+    border-color: silver;
+    border-width: 2px;
+    border-radius: 5px;
+    background-color: white;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 2px;
+}
+
+.score {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: white;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: baseline;
+}
+
+.games-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: white;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+hr {
+    border: 0;
+    clear: both;
+    display: block;
+    width: 96%;
+    background-color: silver;
+    height: 1px;
+}
+
+.game-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px;
+    align-items: center;
+}
+
+.Team {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 5px;
+    margin: 5px;
+}
+
+.img-logo {
+    width: 50px;
+    height: 50px;
+}
+
 #loggedin {
     margin-left: 10px;
 }

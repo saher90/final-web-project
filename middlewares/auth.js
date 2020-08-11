@@ -27,7 +27,6 @@ function parseUser(req, res, next) {
 function authorized(req, res, next) {
 
     if (!req.user) {
-        console.log("hello")
         return res.sendStatus(403)
     }
     return next();

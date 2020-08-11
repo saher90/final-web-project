@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const fetch = require("node-fetch");
 const jwt = require('jsonwebtoken');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
@@ -10,6 +11,7 @@ const dbName2 = 'test'
 const JWT_SECRET = 'black life matter XD';
 const COOKIE_NAME = 'jwt-access-token';
 const ADMINPASSWORD = "telhai"
+
 
 MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
@@ -415,6 +417,50 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             })
             res.status(200).send(array)
         });
+    })
+    router.post('/get-weather', (req, res) => {
+        if (!req.body) {
+
+            return res.sendStatus(400);
+        }
+        var { city } = req.body
+        var key = '41a8d7480cccc912a1a3202158a02c0f'
+        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'json' },
+        }).then(data => {
+            data.json().then(Jdata => {
+
+                return res.send(Jdata)
+            })
+        }).catch(Jdata => {
+            return res.sendStatus(400)
+        })
+
+    })
+    router.get('/nba-api', (req, res) => {
+        //var unirest = require("unirest");
+
+        var yesterday = (new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()).split('T')[0]
+
+
+        fetch(`https://api-nba-v1.p.rapidapi.com/games/date/${yesterday}`, {
+            method: 'GET',
+            headers: {
+                "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                "x-rapidapi-key": "660e11f854mshc0d1e6cf6438d48p1c89d5jsn062d5296618b",
+                "useQueryString": true
+            },
+        }).then(data => {
+            data.json().then(Jdata => {
+                return res.send(Jdata)
+            }).catch(Jdata => {
+                return res.sendStatus(400)
+            })
+        }).catch(Jdata => {
+            return res.sendStatus(400)
+        })
+
     })
 
 
