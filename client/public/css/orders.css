@@ -15,7 +15,7 @@
     background-image: url('/img/header-img.jpg');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    height: 200px;
+    height: 180px;
 }
 
 .orders-container {
@@ -29,6 +29,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     flex-direction: column;
+    padding: 5px;
 }
 
 .order-container {
@@ -36,6 +37,7 @@
     border-radius: 5px;
     margin-top: 3px;
     margin-bottom: 3px;
+    padding: 5px;
     background-color: silver;
     border-style: solid;
     border-color: forestgreen;
@@ -52,7 +54,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
-    padding-top: 2px;
+    padding: 5px
 }
 
 .large-detals-box {
@@ -72,11 +74,10 @@
     border-color: green;
     border-width: 1px;
     border-radius: 5px;
-    margin: 2px;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
-    padding-top: 2px;
+    padding: 5px;
 }
 
 .order-detal-box {
@@ -87,7 +88,8 @@
     border-color: black;
     border-width: 1px;
     border-radius: 5px;
-    margin: 2px;
+    padding: 5px;
+    margin-top: 5px;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
@@ -124,11 +126,32 @@
 #btn-show {
     border-radius: 10px;
     margin-bottom: 2px;
-    background-color: mediumseagreen
+    background-color: mediumseagreen;
+    width: 100px;
 }
 
 #btn-close {
     border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 5px;
     margin-bottom: 2px;
-    background-color: firebrick
+    background-color: firebrick;
+    width: 100px;
+}
+
+@media only screen and (max-width: 768px) {
+    #navbar-wrap {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+    #loggedin {
+        margin-left: 0px;
+    }
+    .mini-detals-box {
+        flex-direction: column;
+    }
+    .user-detal-box {
+        flex-direction: column;
+    }
 }
