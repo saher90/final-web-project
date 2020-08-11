@@ -5,8 +5,9 @@
     "main": "server.js",
     "scripts": {
         "dev": "nodemon server.js",
-        "start": "node server.js"
-
+        "start1": "node load-db.js",
+        "start2": "node server.js",
+        "start": "npm run start1"
 
     },
     "repository": {
