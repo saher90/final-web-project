@@ -17,7 +17,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
 
-    const db = client.db(dbName2);
+    const db = client.db(dbName);
     console.log(url)
 
     router.post('/login', (req, res) => {
@@ -208,6 +208,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         res.redirect('/');
     });
     router.get('/products-items', function(req, res) {
+        console.log("products")
         const collection = db.collection('products')
         collection.find().toArray(function(err, docs) {
             assert.equal(err, null);
@@ -320,6 +321,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
 
     })
     router.get('/is-admin', checkuser, (req, res) => {
+        console.log("is-admin")
         return res.send(req.admin);
         /* if (!req.body) {
              return res.send({ admin: "empty" });
@@ -470,7 +472,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
             req.admin = "empty"
             return next();
         }
-
+        console.log("checkuser")
         if (!req.user) {
             req.admin = "empty"
             return next();

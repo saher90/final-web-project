@@ -1,7 +1,9 @@
 $(document).ready(function() {
 
     $.get('/is-admin', function(data, status) {
+        console.log("isadmin home")
         if (status) {
+            console.log("yes admion hoome")
             var flag = data.admin
             if (flag == "admin") {
                 $(".flex-row.navbar-container").html('')

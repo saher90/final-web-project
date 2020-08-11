@@ -28,7 +28,9 @@ $(document).ready(function() {
 
     })
     $.get('/is-admin', function(data, status) {
+        console.log("isadmin")
         if (status) {
+            console.log("is admin yessss")
             var flag = data.admin
             if (flag == "admin") {
                 $(".flex-row.navbar-container").html('')
