@@ -148,7 +148,7 @@ $(document).ready(function() {
     })
 
     $(document).on('change', '.class-quantity', function() {
-        var amount = $(this).val()
+        var amount = Number($(this).val())
         var oldvalue
         var temp
         var elmId

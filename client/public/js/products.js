@@ -28,9 +28,9 @@ $(document).ready(function() {
 
     })
     $.get('/is-admin', function(data, status) {
-        console.log("isadmin")
+
         if (status) {
-            console.log("is admin yessss")
+
             var flag = data.admin
             if (flag == "admin") {
                 $(".flex-row.navbar-container").html('')
@@ -71,10 +71,10 @@ $(document).ready(function() {
 
     $(document).on('click', '.btn-submit', function() {
         var elmId = $(this).closest(".product-small-wrap").attr("id");
-        var amount = $(this).closest(".text-wrap").find(".class-quantity").val()
-        var iteamValue = Number($(this).closest(".form-wrap").find('#price').html()) / amount
+        var amount = Number($(this).closest(".text-wrap").find(".class-quantity").val())
+
         $(this).closest(".text-wrap").find(".class-quantity").val(1)
-        $(this).closest(".form-wrap").find('#price').html(`${iteamValue}`)
+        $(this).closest(".form-wrap").find('#price').html(`20`)
         $.post('/products', { productId: elmId, quantity: amount }, 'json').done(function(res, status) {
             if (status)
                 alert("item added to cart!")
@@ -88,7 +88,8 @@ $(document).ready(function() {
         return false;
     })
     $(document).on('click', '.class-quantity', function() {
-        var amount = $(this).val()
+        var amount = Number($(this).val())
+
         if (amount > 0) {
             amount *= 20
             $(this).closest(".form-wrap").find('#price').html(`${amount}`)
@@ -96,5 +97,6 @@ $(document).ready(function() {
             $(this).val(1)
         return false;
     });
+
 
 })
