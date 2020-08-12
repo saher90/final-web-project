@@ -195,7 +195,7 @@ hr {
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     .middle-page {
-        flex-direction: column;
+        flex-direction: column-reverse;
         justify-content: space-around;
     }
     .final {
