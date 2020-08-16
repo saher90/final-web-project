@@ -1,3 +1,10 @@
+.page-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 .header {
     background-color: #f1f1f1;
     padding: 30px;
