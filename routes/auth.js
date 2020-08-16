@@ -17,7 +17,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
 
-    const db = client.db(dbName);
+    const db = client.db(dbName2);
     console.log(url)
 
     router.post('/login', (req, res) => {
@@ -376,17 +376,24 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
         if (!req.body) {
             return res.sendStatus(400);
         }
-        const { firstname, lastname, tel, email, address, country, city, totalPrice, deliveryMethod } = req.body
+        var totalPrice = 0
+        var { firstname, lastname, tel, email, address, country, city, deliveryMethod } = req.body
         const collection = db.collection('carts');
         const collection2 = db.collection('orders');
         const username = req.user.username
         var orders = []
-        const array = collection.findOne({ username: username })
+        const doce = collection.findOne({ username: username })
 
-        array.then(doc => {
+        doce.then(doc => {
             doc.products.forEach(product => {
                 orders.push(product)
+                totalPrice += product.quantity * 20
+
             })
+            if (deliveryMethod != "Normal Delivery") {
+                totalPrice += 10;
+                deliveryMethod = "Fast Delivery"
+            }
 
             const data = {
                 username,

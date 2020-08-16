@@ -66,10 +66,6 @@ $(document).ready(function() {
         var deliveryMethod = $('#deliveryType').val();
         var totalPrice = Number($("#totalPrice").html());
 
-
-        if (deliveryMethod != "Normal Delivery") {
-            totalPrice += 10;
-        }
         if ($('#Name').val() < 1) {
             $('#Name').parent().find('.invalid-feedback').show();
             isValid = false
@@ -115,7 +111,6 @@ $(document).ready(function() {
                 address,
                 country,
                 city,
-                totalPrice,
                 deliveryMethod
             }
             $.post('/order', data, 'json').done(function(res, status) {

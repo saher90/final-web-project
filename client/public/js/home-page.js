@@ -81,7 +81,7 @@ $(document).ready(function() {
                 </div>
                 <div class="score">
                     <h4 id="vTeam-score">${game.vTeam.score.points}</h4>
-                    <p class="final"><b> final </b></p>
+                    <p class="final"><b>final </b></p>
                     <h4 id="hTeam-score">${game.hTeam.score.points}</h4>
                 </div>
 
@@ -92,9 +92,9 @@ $(document).ready(function() {
             </div>`)
                 if (--counter > 0) $('.games-wrap').append(`<hr>`)
             })
-            console.log($('.games-wrap').html())
-                /* $('.img-logo').width(50); // Units are assumed to be pixels
-                 $('.img-logo').height(50);*/
+
+            /* $('.img-logo').width(50); // Units are assumed to be pixels
+             $('.img-logo').height(50);*/
         }).fail(res => {
             console.log("error nba api")
         })
