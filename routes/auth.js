@@ -17,7 +17,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, function(err, client) {
     assert.equal(null, err);
     console.log("Connected successfully to server");
 
-    const db = client.db(dbName2);
+    const db = client.db(dbName);
     console.log(url)
 
     router.post('/login', (req, res) => {
